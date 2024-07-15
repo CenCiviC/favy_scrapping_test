@@ -1,5 +1,6 @@
-from .base62 import encode_to_base62
-from .base62 import decode_from_base62
+from .hash import generate_etag
+from .hash import encode_to_base62
+from .hash import decode_from_base62
 
 from .normalize import normalize_string
 

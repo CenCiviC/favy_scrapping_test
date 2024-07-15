@@ -1,3 +1,8 @@
+import hashlib
+
+def generate_etag(response_body: str):
+    return hashlib.sha256(response_body.encode('utf-8')).hexdigest()
+
 def encode_to_base62(input_str: str) -> str:
     def encode_base62(num):
         characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"

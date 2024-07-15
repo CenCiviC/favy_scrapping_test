@@ -5,6 +5,7 @@ import hmac
 import base64
 import requests
 import time
+from utils.files import *
 
 def	make_signature():
 	timestamp = int(time.time() * 1000)
@@ -15,7 +16,7 @@ def	make_signature():
 	secret_key = bytes(secret_key, 'UTF-8')
 
 	method = "POST"
-	uri = "/alimtalk/v2/services/ncp:kkobizmsg:kr:3343526:favy-sms-test/messages"
+	uri = "/alimtalk/v2/services/ncp:kkobizmsg:kr:3343526:favy_partners_alimtalk/messages"
 
 	message = method + " " + uri + "\n" + timestamp + "\n" + access_key
 	message = bytes(message, 'UTF-8')
@@ -34,7 +35,7 @@ epoch = datetime(1970, 1, 1)
 # 경과 시간을 밀리초 단위로 계산합니다
 elapsed_time_ms = int((current_time - epoch).total_seconds() * 1000)
 
-
-
+# url = "https://www-prd-kr.gentlemonster.com/media/catalog/product/cache/6c6f229b8a7ab97f51028776641e27d1/1/1/11001_EVE_01_1_1.jpg"
+# download_image_by_url(url, "test")
 print(make_signature())
 print(elapsed_time_ms)
