@@ -10,3 +10,4 @@ from .compare import find_most_similar_string
 from .url import extract_shoppingmall_name
 from .url import change_link_to_variable
 from .url import get_youtube_video_id
+from .url import extract_instagram_id_and_index

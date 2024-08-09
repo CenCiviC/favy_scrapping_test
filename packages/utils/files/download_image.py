@@ -1,4 +1,5 @@
 import requests
+import certifi
 from PIL import Image
 from io import BytesIO
 import urllib.request
@@ -6,7 +7,7 @@ from .file_path import public_img_abspath
 
 
 headers = {
-     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:98.0) Gecko/20100101 Firefox/98.0",
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*; q=0.8",
     "Accept-Language": "ko-KR,ko;q=0.8,en-US,en;q=0.5",
     "Accept-Encoding": "gzip, deflate",
@@ -20,10 +21,12 @@ headers = {
     "Cache-Control": "max-age=0",
 }
 
+
+
 def download_image_by_url(imgUrl:str, imgName: str) -> bool:
     try:
         # 이미지 다운로드
-        response = requests.get(imgUrl, headers=headers, verify=False)  
+        response = requests.get(imgUrl, headers=headers, verify=certifi.where())  
         img = Image.open(BytesIO(response.content))
 
         # 이미지를 webp 형식으로 변환 및 저장

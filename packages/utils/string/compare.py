@@ -1,7 +1,6 @@
 from .normalize import normalize_string
 
 from typing import List
-from utils.variables import CLOTHES_COLOR, CLOTHES_CATEGORY
 
 #쇼핑몰 제목과 상품명 비슷한지 확인하는 함수
 def check_common_substring(s1:str, s2:str, length = 4) ->bool:

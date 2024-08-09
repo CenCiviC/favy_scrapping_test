@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from typing import Optional, Tuple, List
 
 from utils.string import change_link_to_variable, find_most_similar_string
-from utils.variables import CLOTHES_COLOR, CLOTHES_CATEGORY
+from utils.variables import CLOTHES_COLORS, CLOTHES_CATEGORIES
 
 
 load_dotenv()
@@ -34,8 +34,8 @@ def filter_category_color(category_script: str)-> Optional[Tuple[str, str]]:
       return None
 
     # 최대 유사도 및 가장 유사한 카테고리 초기화
-    most_similar_category = find_most_similar_string(unnormalized_category, CLOTHES_CATEGORY)
-    most_similar_color = find_most_similar_string(unnormalized_color, CLOTHES_COLOR)
+    most_similar_category = find_most_similar_string(unnormalized_category, CLOTHES_CATEGORIES)
+    most_similar_color = find_most_similar_string(unnormalized_color, CLOTHES_COLORS)
 
     # 가장 유사한 카테고리 반환
     return most_similar_category, most_similar_color

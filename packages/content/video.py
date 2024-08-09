@@ -8,8 +8,6 @@ from utils.number import timeline_to_second
 from utils.files import delete_local_file
 from api.aws import save_file_to_s3
 
-
-
 class CaptionInfo(Enum):
     TIMELINE = 0
     BRAND = 1

@@ -15,6 +15,8 @@ YOUTUBE_LINK = "https://www.youtube.com/watch?v="
 
 def download_video(url, path:str, timeList: List[float])-> Optional[str]:
     yt = YouTube(url)
+    #FIXME: pytube HTTP Error 400: Bad Request가 뜸 수정 필요
+    #TODO: lookbook model utils오류 
     try:
         #최고 해상도 선택
         video = yt.streams.filter(adaptive=True, file_extension='mp4').first()
@@ -267,3 +269,4 @@ def download_coordi_video_image(videoId: str, timeList : List[float],fileName: s
         print("해당 파일이 존재하지 않습니다.")
         
     return best_frames
+

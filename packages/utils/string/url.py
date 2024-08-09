@@ -61,3 +61,29 @@ def get_youtube_video_id(url:str) -> str:
         video_id = url[start_index:end_index]  # '&' 이전까지의 문자열이 video ID입니다.
 
     return video_id
+
+
+def extract_instagram_id_and_index(url: str) -> Tuple[str, int]:
+    """
+    Instagram 게시물 링크에서 media id와 index를 반환하는 함수
+
+    Args:
+        url (str): 입력 url.
+
+    Returns:
+        Tuple[str, int]: media id, index
+    """
+    # Base URL과 query 부분 분리
+    parts = url.split('?')
+    base_url = parts[0]
+    
+    # media id 추출
+    media_id = base_url.split('/')[-2]
+    
+    # index 추출
+    if len(parts) > 1 and 'img_index=' in parts[1]:
+        index = int(parts[1].split('img_index=')[1])
+    else:
+        index = 1
+    
+    return media_id, index

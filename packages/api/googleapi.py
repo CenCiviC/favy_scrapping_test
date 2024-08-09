@@ -3,6 +3,7 @@ from utils.string import normalize_string
 from dotenv import load_dotenv
 import os 
 from typing import Optional, List, Tuple
+from utils.variables import MAJOR_SITES, EXCEPTION_SITES
 
 load_dotenv()
 SERPAPI_API_KEY = os.environ.get('SERPAPI_API_KEY')
@@ -40,7 +41,7 @@ def search_product_link(brandName: str, productName: str) -> Optional[str]:
 
         try:
             for link_response in candidate_link:
-                keywords = ['번개장터', '나무위키', '네이버', 'naver']
+                keywords = EXCEPTION_SITES
                 if any(keyword in link_response['source'] for keyword in keywords):
                     continue
 
@@ -69,10 +70,10 @@ def search_related_product(url: str) -> Tuple[str, List[str]]:
     })
 
     relevant_results = []
-    major_sites = ["무신사", "에이블리", "지그재그", "위시버킷", "29cm.co.kr", "29cm", "W Concept.co.kr", "kream", "W컨셉"]
+
     for result in results["visual_matches"]:
         processed_source = normalize_string(result["source"])
-        for site in major_sites:
+        for site in MAJOR_SITES:
             processed_site = normalize_string(site)
             if processed_source == processed_site:
                 link = result["link"]
@@ -102,10 +103,10 @@ def search_same_product(page_token:str):
     
     #TODO: major site의 정보 가져오기 
     relevant_results = []
-    major_sites = ["무신사", "에이블리", "지그재그", "위시버킷", "29cm.co.kr", "29cm", "W Concept.co.kr", "kream", "W컨셉"]
-    for result in results["visual_matches"]:
+    
+    for result in results["image_sources"]:
         processed_source = normalize_string(result["source"])
-        for site in major_sites:
+        for site in MAJOR_SITES:
             processed_site = normalize_string(site)
             if processed_source == processed_site:
                 link = result["link"]
