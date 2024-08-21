@@ -56,7 +56,7 @@ def upload_instagram_shot():
 
 #사이트 url을 받아서 product 기본 정보 출력
 @app.route('/product', methods=['GET'])
-def product():
+def product_info():
     if request.method == 'GET':
         try:
             url = request.form['url']
@@ -98,7 +98,6 @@ def sales():
             return jsonify({'error': 'Api error occurs'})
     else:
         return jsonify({'error': 'Invalid request method'})
-    
     
 if __name__ == '__main__':
     app.run(debug=True)
