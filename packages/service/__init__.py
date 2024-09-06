@@ -1,4 +1,5 @@
-from .instagram import service_instagram_shot_info
+from .instagram import service_instagram_info
+from .instagram import service_instagrm_shot_info
 
 from .youtube import service_video
 

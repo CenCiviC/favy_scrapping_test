@@ -2,7 +2,8 @@ import requests
 import certifi
 from PIL import Image
 from io import BytesIO
-import urllib.request
+from typing import Optional
+
 from .file_path import public_img_abspath
 
 
@@ -23,7 +24,7 @@ headers = {
 
 
 
-def download_image_by_url(imgUrl:str, imgName: str) -> bool:
+def download_image_by_url(imgUrl:str, imgName: str) -> Optional[str]:
     try:
         # 이미지 다운로드
         response = requests.get(imgUrl, headers=headers, verify=certifi.where())  
@@ -33,10 +34,10 @@ def download_image_by_url(imgUrl:str, imgName: str) -> bool:
         img_path = public_img_abspath(imgName + ".webp")
         img.save(img_path, "WEBP")
         print(f"Image {imgName} saved as webp format.")
-        return True
+        return img_path
     except Exception as e:
         print(f"Error downloading or converting image {imgUrl}: {e}")
-        return False
+        return None
     
     
 def convert_image_to_webp(input_path, img_name):

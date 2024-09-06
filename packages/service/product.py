@@ -1,5 +1,5 @@
 #service
-from scraper.instagram import InstagramExtractor
+from scraper.insta import InstagramExtractor
 from typing import Tuple, Optional, List
 from jsonify.product import *
 from api.googleapi import search_related_product, search_same_product
@@ -44,7 +44,7 @@ def service_related_product_info(product_image_url: str, product_name:str):
     return data 
 
 def service_sales(product_image_url):
-        #page token을 했을 때 image_sources가 있는지 없는지로 확인함
+    #page token을 했을 때 image_sources가 있는지 없는지로 확인함
     page_token, _ = search_related_product(product_image_url)
     same_product_links = search_same_product(page_token)
     

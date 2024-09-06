@@ -84,6 +84,6 @@ def extract_instagram_id_and_index(url: str) -> Tuple[str, int]:
     if len(parts) > 1 and 'img_index=' in parts[1]:
         index = int(parts[1].split('img_index=')[1])
     else:
-        index = 1
+        index = 0
     
     return media_id, index

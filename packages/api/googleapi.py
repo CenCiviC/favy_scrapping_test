@@ -52,40 +52,55 @@ def search_product_link(brandName: str, productName: str) -> Optional[str]:
 
     return None
 
-def search_related_product(url: str) -> Tuple[str, List[str]]:
-    """주어진 URL에 관련된 상품 링크를 검색하여 반환합니다.
+
+def search_related_product(url: str) -> Tuple[Optional[str], List[str]]:
+    """주어진 URL에 관련된 상품 링크를 검색하여 반환합니다. 이미지가 없을 경우 오류 발생
 
     Args:
         url (str): 상품 이미지의 URL입니다.
 
     Returns:
-        Tuple[str, List[str]]: 검색된 관련 상품 링크의 목록과 다음 페이지 토큰을 반환합니다.
+        Tuple[Optional[str], List[str]]: 검색된 관련 상품 링크의 목록과 다음 페이지 토큰을 반환합니다.
+        이미지가 없을 경우 None을 반환합니다.
     """
-    client = serpapi.Client(api_key=SERPAPI_API_KEY)
-    results = client.search({
-        "engine": "google_lens",
-        "url": url,
-        "hl": "ko",
-        "country": "kr",
-    })
+    try:
+        client = serpapi.Client(api_key=SERPAPI_API_KEY)
+        results = client.search({
+            "engine": "google_lens",
+            "url": url,
+            "hl": "ko",
+            "country": "kr",
+        })
 
-    relevant_results = []
+        relevant_results = []
 
-    for result in results["visual_matches"]:
-        processed_source = normalize_string(result["source"])
-        for site in MAJOR_SITES:
-            processed_site = normalize_string(site)
-            if processed_source == processed_site:
-                link = result["link"]
-                relevant_results.append(link)
+        # 검색 결과가 있는지 확인
+        if "visual_matches" not in results or not results["visual_matches"]:
+            raise ValueError("이미지와 관련된 검색 결과가 없습니다.")
+
+        for result in results["visual_matches"]:
+            processed_source = normalize_string(result["source"])
+            for site in MAJOR_SITES:
+                processed_site = normalize_string(site)
+                if processed_source == processed_site:
+                    link = result["link"]
+                    relevant_results.append(link)
+                    break
+            
+            if len(relevant_results) > 5:
                 break
         
-        if len(relevant_results) >5:
-            break
-        
-    page_token = results["image_sources_search"]["page_token"]
+        page_token = results.get("image_sources_search", {}).get("page_token")
 
-    return page_token, relevant_results
+        return page_token, relevant_results
+    
+
+    except ValueError as e:
+        print(f"오류 발생: {e}")
+        return None, []
+    except Exception as e:
+        print(f"알 수 없는 오류 발생: {e}")
+        return None, []
 
 
 

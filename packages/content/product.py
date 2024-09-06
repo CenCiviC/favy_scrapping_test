@@ -26,7 +26,7 @@ class Product:
     def print_result(self):
         info = self.productInformation
         if self.valid:
-            print(f"site: {info.siteName} product: {info.productName} brand: {info.brand} price: {info.price} sale_price: {info.sale_price} category: {info.category} url: {info.siteUrl}")
+            print(f"site: {info.siteName} \nproduct: {info.productName} \nbrand: {info.brand} \nprice: {info.price} \nsale_price: {info.sale_price} \ncategory: {info.category} \nurl: {info.siteUrl}")
         else:
             print(f"Error in {info.siteName}")
             

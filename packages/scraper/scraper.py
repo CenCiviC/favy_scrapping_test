@@ -42,8 +42,9 @@ class WebScraper:
         return soup
 
     
-    def get_webdriver(self):
+    def get_webdriver(self):        
         options = webdriver.ChromeOptions()
+        options.add_argument('incognito')
         driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
         driver.get(self.url)
     

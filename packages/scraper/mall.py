@@ -93,7 +93,7 @@ class ShoppingMallInfoExtractor:
         
         #브랜드
         try:
-            self.info.brand = soup.select_one("#__next > div.zds-themes.light-theme > div > div > div.pdp_shop_info_row > div > button > span").get_text()
+            self.info.brand = soup.select_one("#__next > div.zds-themes.light-theme > div > div.pdp_shop_info_row > div > button > span").get_text()
         except:
             self.info.brand = None
         
@@ -108,22 +108,27 @@ class ShoppingMallInfoExtractor:
                 if content:
                     self.info.productName = content
                     
-                    
-        
-       
+
         #가격 
-        price_info_candidate = ["#__next > div.zds-themes.light-theme > div > div > div.css-ii143i.e1ttpfby1 > div:nth-child(1) > div > div.css-ntoqth.eizm2tm2 > div.css-14j45be.eizm2tm0", "#__next > div.zds-themes.light-theme > div > div > div.css-1qzycks.e1ttpfby1 > div:nth-child(1) > div > div.css-ntoqth.eizm2tm2 > div.css-14j45be.eizm2tm0"]
+        price_info_candidate = ["#__next > div.zds-themes.light-theme > div > div.css-o5kf1f.e1jp8cim0 > div:nth-child(1) > div > div.css-1tl2a56.e1yx2lle0 > div.css-14j45be.e1yx2lle2",
+                                ]
         for info_candidate in price_info_candidate: 
             try:         
                 self.info.price =  extract_price(soup.select_one(info_candidate).get_text())
                 break                
             except:
                 self.info.price = None
-            
-        try:
-            self.info.sale_price = extract_price(soup.select_one(" #__next > div.zds-themes.light-theme > div > div > div.css-ii143i.e1ttpfby1 > div:nth-child(1) > div > div.css-vogdud.e1o0mpyu4 > div.css-1dpat39.e1o0mpyu3").get_text())
-        except:
-            self.info.sale_price = None
+        
+
+        #가격 
+        price_info_candidate = ["#__next > div.zds-themes.light-theme > div > div.css-o5kf1f.e1jp8cim0 > div:nth-child(1) > div > div.css-vogdud.e1ovj4ty0 > div.css-1dpat39.e1ovj4ty1", 
+                                "#__next > div.zds-themes.light-theme > div > div.css-1wb0oo5.e1jp8cim0 > div:nth-child(1) > div > div > div.css-1fo6xrw.e1ovj4ty1"]
+        for info_candidate in price_info_candidate: 
+            try:         
+                self.info.sale_price =  extract_price(soup.select_one(info_candidate).get_text())
+                break                
+            except:
+                self.info.sale_price = None 
             
             
     def extract_wconcept_info(self):
@@ -193,27 +198,25 @@ class ShoppingMallInfoExtractor:
         driver = self.scraper.get_webdriver()
 
         time.sleep(2)
-    
+
         #product
         try:
-            self.info.productName =  driver.find_element(By.CSS_SELECTOR, "div > div.sc-49a6472c-0.cSkDBD > p").text
+            self.info.productName =  driver.find_element(By.CSS_SELECTOR, "div > div.sc-49a6472c-0.dOgFPf > p").text
         except:
             self.info.productName = None
             
         #브랜드
         try:
-            self.info.brand = driver.find_element(By.CSS_SELECTOR, "div > div.sc-bc435950-0.iqSBYF > div.sc-bc435950-1.lbXtVW > p.typography.typography__subtitle2.color__gray70").text
+            self.info.brand = driver.find_element(By.CSS_SELECTOR, "div.sc-bc435950-0.gxLQbd > div.sc-bc435950-1.getNAU > p.typography.typography__subtitle2.color__gray70").text
         except:
             self.info.brand = None
         
         #로고 url
         self.info.logoUrl = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAL0AAAEKCAMAAABwsaR7AAAAdVBMVEX///8fHx8AAACdnZ0cHBzu7u4YGBje3t4UFBQEBAQaGhpmZmZiYmJISEgRERHn5+c0NDRVVVWWlpY9PT3BwcHIyMitra1BQUFSUlJMTEz39/fY2Nh/f39sbGzR0dExMTEqKiqSkpKzs7OGhoZ0dHSlpaUmJiargEW1AAAC80lEQVR4nO3X23qiMBSGYRK2oYJWbLXaWttq7/8SuxJ3SbD2BJ6Zg+89mFEW0B9YSTBJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgIuPZdN0097mvHm82H/G1XLWNMvX/skWsr1ZXb6u5NtsMWzewFpXRaG/ettzu72onFbvossrdVGYhxune2nlbPPTl7ns1TaDR/Y8a6VUVq/j7bndrmqRyf+VCncopVrdSr+xh+njtU61HKo3o8Q+6WqbUj/H24/pl123fHeB5kH11/TJq1GqnbiPk1Ypc6O9hvPkQqpiGRds+vq49UkC1bug+nv6tbE3fHE6ddb2HuqQ3uT+2NbQ26jg0nfHz6+ykw6qv6d3rVi/y4ddfeuZDmlq78+skChvUcVPPzcqM0H1TvqkK1yjzWWXohs+sufD2Mc8qeTfPKz46We1qiZB9V76rW1GY9ut/0SHJV2TqWQhf8+Ew9Klz96fxaGzF/cUVO+lT/a2G237t/txUp982tgfSZLJRRRhyc05mRam7l/b3fR5m7mpIIuf58Ca4tgyroHCBfU4Y54UqzI88G76JD0eq9NRQp/ZpcUNVxu1eAlqQXoVr8b309uBIqNmNkbmK9ug5rDdbjerOl4Vr52jddVbrv5I71aRaKgMbe1ur7H5pINUGyyLbtR2U2v7WNkL8dedP9K72aAdKfZJGjRHNMj8GTOpz+vn2X+Q/lsyZWfxKAvSuwXh4FX/fXo7y2ffsxPpnWznVYP09mUiWPRLfWN59oyf3nazvsyEX23YHF7fl/ZlMRyEpVvLHiZn8bI0enp3+67rv33jqa6/inpzjizJ0cEqq87a+H1m9PTuxdG7n+5RXH9C5fGQDua/MqzW8Qv22OlzeQXQO2/DQhuj917dXMntD3+dln5V6vHCZOTkOhnPZp6maXA/U+vybT1Prw7xL+vcr9odonp4LgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAHVmIdLTliqP8AAAAASUVORK5CYII="
             
-        
         #price
-        price_info_candidate = ["#root > div > div.sc-49a6472c-0.cSkDBD > div > div.sc-d8a0b042-0.eVmIiV > div > div > p.Typography__Tag-sc-lpjd4z-0.QRWYk.typography.typography__body1.color__gray30.sc-7dc5a431-0.hdOcgx", 
-                                "div > div.sc-49a6472c-0.cSkDBD > div > div.sc-d8a0b042-0.eVmIiV > div > div > p.Typography__Tag-sc-lpjd4z-0.QRWYk.typography.typography__body1.color__gray30.sc-7dc5a431-0.hdOcgx",
-                                "div > div.sc-49a6472c-0.cSkDBD > div > div.sc-d8a0b042-0.eVmIiV > div > div > p.typography.typography__body1.color__gray30.sc-7dc5a431-0.hdOcgx"]
+        price_info_candidate = ["div.sc-49a6472c-0.dOgFPf > div > div.sc-d8a0b042-0.eVmIiV > div > div > p.typography.typography__body1.color__gray30.sc-7dc5a431-0.gshZlJ",
+                                ]
 
         for info_candidate in price_info_candidate:                    
             try:
@@ -221,12 +224,10 @@ class ShoppingMallInfoExtractor:
                 break
             except:
                 self.info.price = None
+                
         #real price
-        sale_price_info_candidate = [" #root > div > div.sc-49a6472c-0.cSkDBD > div > div.sc-d8a0b042-0.eVmIiV > div > div > p.Typography__Tag-sc-lpjd4z-0.QRWYk.typography.typography__h5.color__gray70",
-                                        "#root > div > div.sc-49a6472c-0.cSkDBD > div > div.sc-d8a0b042-0.eVmIiV > div > div > p.Typography__Tag-sc-lpjd4z-0.Typography___StyledTag-sc-lpjd4z-1.QRWYk.AWxjJ.typography.typography__h5",
-                                        "div > div.sc-49a6472c-0.cSkDBD > div > div.sc-d8a0b042-0.eVmIiV > div > div > p.Typography__Tag-sc-lpjd4z-0.QRWYk.typography.typography__h5.color__gray70",
-                                        "div > div.sc-49a6472c-0.cSkDBD > div > div.sc-d8a0b042-0.eVmIiV > div > div > p",
-                                        "div > div.sc-49a6472c-0.cSkDBD > div > div.sc-d8a0b042-0.eVmIiV > div > div > p.typography.typography__h5.color__gray70"]
+        sale_price_info_candidate = ["div.sc-49a6472c-0.dOgFPf > div > div.sc-d8a0b042-0.eVmIiV > div > div > p.typography.typography__h5.color__gray70",
+                                     ]
                                     
         for info_candidate in sale_price_info_candidate: 
             try:                    
@@ -256,7 +257,8 @@ class ShoppingMallInfoExtractor:
         time.sleep(2)
         
         
-        brand_info_candidate = ["#root > div.sc-18j0po5-0.gpwaIb > div:nth-child(2) > dl:nth-child(1) > dd > a", "#root > div.sc-18j0po5-0.gpwaIb > div:nth-child(3) > dl:nth-child(1) > dd > a"]
+        brand_info_candidate = ["#root > div.sc-1f8zq2z-0.SRIds > div.sc-ysl0re-0.UluGl > div:nth-child(1) > div > a > div.sc-11x022e-2.dVnbGG > span.text-sm.font-medium.font-pretendard",
+                                ]
         
         for info_candidate in brand_info_candidate: 
             try:
@@ -269,7 +271,8 @@ class ShoppingMallInfoExtractor:
         self.info.logoUrl = "data:image/png;base64,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"
         
         
-        product_info_candidate = ["#root > div.sc-1pxf5ii-0.ixVbGB > h2"]
+        product_info_candidate = ["#root > div.sc-1f8zq2z-0.SRIds > div.sc-ysl0re-0.UluGl > div.px-4.pt-1.sc-ysl0re-1.iROunM > span",
+                                  ]
 
         for info_candidate in product_info_candidate:           
             try:
@@ -278,10 +281,8 @@ class ShoppingMallInfoExtractor:
             except:
                 self.info.productName = None
                 
-
-        price_info_candidate = ["#root > div.sc-f0xecg-0.glimmV > div > div.sc-f0xecg-4.jKJERj.gtm-catch-click > span",
-                                "#root > div.sc-f0xecg-0.glimmV > div > div > span",
-]
+        price_info_candidate = ["#root > div.sc-1f8zq2z-0.SRIds > div.sc-ysl0re-0.UluGl > div.sc-xz8kdb-0.drIrxb.px-4.pt-4 > div > div > span",
+                                ]
 
         #price
         for info_candidate in price_info_candidate:
@@ -293,11 +294,9 @@ class ShoppingMallInfoExtractor:
                 self.info.price = None
 
         #sale price
-        sale_price_info_candidate = ["#root > div.sc-f0xecg-0.glimmV > span",
-                                        
-]
+        sale_price_info_candidate = ["#root > div.sc-1f8zq2z-0.SRIds > div.sc-ysl0re-0.UluGl > div.sc-xz8kdb-0.drIrxb.px-4.pt-4 > div > div > div > span.text-lg.font-semibold.text-black.font-pretendard",
+                                     ]
         
-
         for info_candidate in sale_price_info_candidate:       
             try:                    
                 price_range = driver.find_element(By.CSS_SELECTOR, info_candidate).text          
@@ -328,13 +327,13 @@ class ShoppingMallInfoExtractor:
         
         #브랜드
         try:
-            self.info.brand = driver.find_element(By.CSS_SELECTOR, "#__next > div.css-uio8sw.e1uo4o521 > div.css-1ux6qe5.e1uo4o525 > div > a > div > h3").text
+            self.info.brand = driver.find_element(By.CSS_SELECTOR, "#__next > div.css-uio8sw.enw4zvv1 > div.css-1ux6qe5.enw4zvv5 > div > a > div > h3").text
         except:
             self.info.brand = None
         
         #로고 url
         self.info.logoUrl = "data:image/jpeg;base64,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"
-        
+
         #product
         try:
             self.info.productName =  driver.find_element(By.ID, "pdp_product_name").text
@@ -342,9 +341,9 @@ class ShoppingMallInfoExtractor:
             self.info.productName =  None
             
             
-        #price 
-        price_info_candidate = ["#__next > div.css-uio8sw.e1uo4o521 > div.css-1y47rmj.e18uevlq0 > div.css-3eeht.e18uevlq1 > div.css-uz7uc7.ek83fdm0 > div > div.css-lcoy4n.ek83fdm7 > div > p.css-1bci2fm.ejuizc31",
-                                "#__next > div.css-uio8sw.efamvvy1 > div.css-1y47rmj.e1muz2ce0 > div.css-3eeht.e1muz2ce1 > div.css-uz7uc7.e1k8yytz0 > div > div.css-lcoy4n.e1k8yytz7 > div > p.css-1bci2fm.e6x3p711"]
+        #price `F` : Frame 생성
+        price_info_candidate = ["#__next > div.css-uio8sw.enw4zvv1 > div.css-1y47rmj.e10h30x90 > div.css-3eeht.e10h30x91 > div.css-uz7uc7.e5oltv00 > div > div.css-lcoy4n.e5oltv07 > div > span.css-xl0psw.e1ep6lp68",
+                                ]
         
         for info_candidate in price_info_candidate:
             try:
@@ -352,7 +351,7 @@ class ShoppingMallInfoExtractor:
                 break
             except:
                 self.info.price = None
-            
+
         #real price
         try:                    
             self.info.sale_price = extract_price(driver.find_element(By.CSS_SELECTOR, "#pdp_product_price").text)

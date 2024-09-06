@@ -41,7 +41,7 @@ def upload_instagram_shot():
     if request.method == 'POST':
         try:
             instagram_url = request.form['url']
-            ig_shot_info_json = service_instagram_shot_info(instagram_url)
+            ig_shot_info_json = service_instagrm_shot_info(instagram_url)
             if not ig_shot_info_json:
                 return jsonify({'error': "error"})
             
@@ -51,6 +51,7 @@ def upload_instagram_shot():
             
     else:
         return jsonify({'error': 'Invalid request method'})
+
     
 ########## common api
 
