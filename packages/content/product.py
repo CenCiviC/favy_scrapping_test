@@ -1,11 +1,11 @@
-from utils.string import encode_to_base62
-from utils.files import delete_local_file
-from utils.files  import download_image_by_url
+from packages.utils.string import encode_to_base62
+from packages.utils.files import delete_local_file
+from packages.utils.files  import download_image_by_url
 
-from api.gpt import categorize_image
-from api.aws import save_file_to_s3
+from packages.api.gpt import categorize_image
+from packages.api.aws import save_file_to_s3
 
-from scraper.mall import ShoppingMallInfoExtractor
+from packages.scraper.mall import ShoppingMallInfoExtractor
 
 from dotenv import load_dotenv
 import os 

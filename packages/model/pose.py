@@ -25,7 +25,7 @@ def is_full_body_image(img_location):
         
         try: 
             # Check all necessary landmarks are visible
-            pose_landmarker_result= pose_landmarker.pose_landmarks[0]
+            pose_landmarker_result = pose_landmarker.pose_landmarks[0]
 
             # Calculate if 50% of the necessary landmarks are visible
             count_visible = sum(lm.visibility > 0.5 for lm in pose_landmarker_result)

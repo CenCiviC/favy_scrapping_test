@@ -9,7 +9,8 @@ mediapipe==0.10.14
 moviepy==1.0.3
 numpy==1.26.4
 openai==1.33.0
-opencv-python==4.10.0.82
+gunicorn==23.0.0
+opencv-python-headless==4.10.0.84
 pandas==2.2.2
 pillow==10.3.0
 platformdirs==4.2.2

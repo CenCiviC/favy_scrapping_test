@@ -11,12 +11,12 @@ from .scraper import WebScraper
 from dotenv import load_dotenv
 import os 
 
-from utils.string import extract_instagram_id_and_index
-from  utils.string import encode_to_base62
-from utils.files import delete_local_file
-from utils.files  import download_image_by_url
+from packages.utils.string import extract_instagram_id_and_index
+from packages.utils.string import encode_to_base62
+from packages.utils.files import delete_local_file
+from packages.utils.files  import download_image_by_url
 
-from api.aws import save_file_to_s3
+from packages.api.aws import save_file_to_s3
 
 load_dotenv()
 S3_CDN_DOMAIN = os.environ.get('S3_CDN_DOMAIN')

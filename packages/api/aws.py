@@ -1,7 +1,7 @@
 import boto3
 from dotenv import load_dotenv
-from utils.files import public_img_abspath
-from utils.files import public_video_abspath
+from packages.utils.files import public_img_abspath
+from packages.utils.files import public_video_abspath
 import os 
 
 load_dotenv()

@@ -4,8 +4,8 @@ import torch
 import numpy as np
 import os
 from typing import List, Optional, Tuple
-from utils.files import clip_video, public_img_abspath
-from utils.number import cal_rectangle_ratio
+from packages.utils.files import clip_video, public_img_abspath
+from packages.utils.number import cal_rectangle_ratio
 from .pose import is_full_body_image
 from scenedetect import detect, ContentDetector
 

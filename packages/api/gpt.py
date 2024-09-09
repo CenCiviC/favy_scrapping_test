@@ -5,8 +5,8 @@ import re
 from dotenv import load_dotenv
 from typing import Optional, Tuple, List
 
-from utils.string import change_link_to_variable, find_most_similar_string
-from utils.variables import CLOTHES_COLORS, CLOTHES_CATEGORIES
+from packages.utils.string import change_link_to_variable, find_most_similar_string
+from packages.utils.variables import CLOTHES_COLORS, CLOTHES_CATEGORIES
 
 
 load_dotenv()

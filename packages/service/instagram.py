@@ -1,9 +1,10 @@
 #service
-from scraper.insta import InstagramExtractor
-from model.shot import crop_images_by_instagram_url
-from api.googleapi import search_related_product
-from jsonify import *
-from content.product import Product
+from packages.scraper.insta import InstagramExtractor
+from packages.model.shot import crop_images_by_instagram_url
+from packages.api.googleapi import search_related_product
+from packages.content.product import Product
+
+from packages.jsonify import *
 
 from typing import Tuple, Optional, List
 

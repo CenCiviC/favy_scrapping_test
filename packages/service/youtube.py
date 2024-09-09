@@ -9,17 +9,17 @@ def service_video(video_id:str):
 # service / json.py/ app.py
 
 
-from api.youtubeapi import get_channel_id, get_youtube_channel_info,get_youtube_video_info
-from api.aws import save_file_to_s3
-from api.gpt import categorize_image
-from api.googleapi import search_related_product, search_same_product
+from packages.api.youtubeapi import get_channel_id, get_youtube_channel_info,get_youtube_video_info
+from packages.api.aws import save_file_to_s3
+from packages.api.gpt import categorize_image
+from packages.api.googleapi import search_related_product, search_same_product
 
-from utils.files import download_image_by_url, convert_image_to_webp, delete_local_file
-from utils.string import encode_to_base62
-from utils.date import calculate_season_by_date
+from packages.utils.files import download_image_by_url, convert_image_to_webp, delete_local_file
+from packages.utils.string import encode_to_base62
+from packages.utils.date import calculate_season_by_date
 
-from content.product import Product
-from content.video import Video
+from packages.content.product import Product
+from packages.content.video import Video
 
 from dotenv import load_dotenv
 import os 

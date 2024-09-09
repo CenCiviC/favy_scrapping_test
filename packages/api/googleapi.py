@@ -1,9 +1,9 @@
 import serpapi
-from utils.string import normalize_string
+from packages.utils.string import normalize_string
 from dotenv import load_dotenv
 import os 
 from typing import Optional, List, Tuple
-from utils.variables import MAJOR_SITES, EXCEPTION_SITES
+from packages.utils.variables import MAJOR_SITES, EXCEPTION_SITES
 
 load_dotenv()
 SERPAPI_API_KEY = os.environ.get('SERPAPI_API_KEY')

@@ -2,8 +2,8 @@ from selenium.webdriver.common.by import By
 import time
 from typing import List, Optional
 
-from utils.string import extract_shoppingmall_name, check_common_substring
-from utils.number import extract_price, is_currency
+from packages.utils.string import extract_shoppingmall_name, check_common_substring
+from packages.utils.number import extract_price, is_currency
 
 from .scraper import WebScraper
 

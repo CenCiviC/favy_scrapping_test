@@ -1,9 +1,8 @@
 #service
-from scraper.insta import InstagramExtractor
 from typing import Tuple, Optional, List
-from jsonify.product import *
-from api.googleapi import search_related_product, search_same_product
-from content.product import Product
+from packages.jsonify.product import *
+from packages.api.googleapi import search_related_product, search_same_product
+from packages.content.product import Product
 
 def service_product_info(url:str):
     product = Product(url)

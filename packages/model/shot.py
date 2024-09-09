@@ -3,8 +3,8 @@ from dotenv import load_dotenv
 import cv2
 import os
 
-from utils.files import download_image_by_url, public_img_abspath, delete_local_file
-from api.aws import save_file_to_s3
+from packages.utils.files import download_image_by_url, public_img_abspath, delete_local_file
+from packages.api.aws import save_file_to_s3
 
 load_dotenv()
 S3_CDN_DOMAIN = os.environ.get('S3_CDN_DOMAIN')
